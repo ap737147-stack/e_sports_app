@@ -18,7 +18,7 @@ The UI includes esports categories, arena sections, match cards, game modes, fil
 
 ---
 
-# 🖼️ 2. App Preview (Based on Actual Screens)
+# 🖼️ 2. App Preview
 
 ### ✔ Home Screen Contains:
 - User ELO badge  
@@ -62,3 +62,4 @@ The UI includes esports categories, arena sections, match cards, game modes, fil
 - Uses Flexible, Expanded, MediaQuery  
 
 ### 🧩 Clean Folder Structure
+
