@@ -61,5 +61,4 @@ The UI includes esports categories, arena sections, match cards, game modes, fil
 - Works on different screen sizes  
 - Uses Flexible, Expanded, MediaQuery  
 
-### 🧩 Clean Folder Structure
-
+### 🧩 Clean Folder StScreens
