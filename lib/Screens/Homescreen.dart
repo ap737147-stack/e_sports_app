@@ -1,4 +1,6 @@
+import 'package:e_sports_app/providers/home_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -40,7 +42,7 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 12),
 
               //------------------ GAME MODE TABS --------------------
-              _gameModeTabs(),
+              _gameModeTabs(Provider.of<HomeProvider>(context)),
 
               const SizedBox(
                 height: 20,
@@ -148,17 +150,13 @@ class HomeScreen extends StatelessWidget {
   }
 
   //---------------- GAME MODE TABS ----------------
-  Widget _gameModeTabs() {
+  Widget _gameModeTabs(HomeProvider provider) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _tabItem(
-          "assets/images/arena.png",
-          "Arena",
-          selected: true,
-        ),
-        _tabItem("assets/images/zenith.png", "Zenith\nLeague"),
-        _tabItem("assets/images/champ.png", "Championship"),
+        _tabItem("assets/images/arena.png", "Arena", 0, provider),
+        _tabItem("assets/images/zenith.png", "Zenith\nLeague", 1, provider),
+        _tabItem("assets/images/champ.png", "Championship", 2, provider),
         const Padding(
           padding: EdgeInsets.only(bottom: 20),
           child: Icon(Icons.more_vert, color: Colors.white, size: 20),
@@ -167,36 +165,40 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _tabItem(String icon, String title, {bool selected = false}) {
-    return Expanded(
-      child: Column(
-        children: [
-          Container(
-            width: 56,
-            height: 56, // ⬆ increased to support 2-line text spacing
-            padding: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              border:
-                  selected ? Border.all(color: Colors.white, width: 2) : null,
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Image.asset(icon, fit: BoxFit.contain),
-          ),
+  Widget _tabItem(String icon, String title, int index, HomeProvider provider) {
+    bool isSelected = provider.selectedGameMode == index;
 
-          // ----- TEXT AREA FIX -----
-          SizedBox(
-            height: 34, // ⬆ fixed height to keep all tabs aligned
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
+    return Expanded(
+      child: InkWell(
+        onTap: () => provider.changeGameMode(index),
+        child: Column(
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              width: 56,
+              height: 56,
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: isSelected ? Colors.white : Colors.transparent,
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Image.asset(icon, fit: BoxFit.contain),
+            ),
+            const SizedBox(height: 4),
+            SizedBox(
+              height: 34,
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -208,8 +210,8 @@ class HomeScreen extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Text(
                   "Esports",
                   style: TextStyle(
@@ -281,9 +283,9 @@ class HomeScreen extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
+        const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             Text(
               "BATTLE ROYALE",
               style: TextStyle(
@@ -305,9 +307,9 @@ class HomeScreen extends StatelessWidget {
           width: 37,
           fit: BoxFit.contain,
         ),
-        Column(
+        const Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: const [
+          children: [
             Text(
               "ENTRY FEES",
               style: TextStyle(

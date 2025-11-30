@@ -1,14 +1,13 @@
-import 'package:e_sports_app/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:provider/provider.dart';
+import 'providers/home_provider.dart';
 import 'Screens/Homescreen.dart';
 
 void main() {
   runApp(
-    MultiBlocProvider(
+    MultiProvider(
       providers: [
-        BlocProvider<HomeBloc>(create: (_) => HomeBloc()),
+        ChangeNotifierProvider(create: (_) => HomeProvider()),
       ],
       child: const MyApp(),
     ),
