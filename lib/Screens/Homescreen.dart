@@ -37,13 +37,13 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(height: 10),
+              const SizedBox(height: 12),
 
               //------------------ GAME MODE TABS --------------------
               _gameModeTabs(),
 
               const SizedBox(
-                height: 15,
+                height: 20,
               ),
 
               //------------------ ESPORTS + REGISTERED MATCHES --------------------
@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
 
               const SizedBox(height: 0),
               Container(height: 1, color: Colors.white12),
-              const SizedBox(height: 12),
+              const SizedBox(height: 15),
 
               //------------------ GAME MODES TITLE ----------------
               const Text(
